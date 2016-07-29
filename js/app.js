@@ -5,7 +5,9 @@ var createCrafts = function(createitem) {
 		api_key: 'mzuqxoiomej58vknkm90fssa',
 		limit: 10,
 		keywords: createitem,
-		includes: ['Images:1'],
+		sort_on: 'score',
+		sort_order: 'down',
+		includes: ['Images'],
 	};
 	
 	$.ajax({
@@ -13,25 +15,31 @@ var createCrafts = function(createitem) {
 		data: request,
 		dataType: "jsonp",
 		type: "GET",
-	})
-	.done(function(){ //this waits for the ajax to return with a succesful promise object
-		console.log(result);
-		$.each(result.items, function(i, item) {
-			$('.create-results').append(result);
-		});
+		success: (function(data){ //this waits for the ajax to return with a succesful promise object
+			console.log(data);
+			$.each(data.results, function(i, item) {
+				$('#create-results').append('<li>' + item.title + ' ' +  '</li>');
+			});
+		})
 	});
-
 };
 
 
 
-$(document).ready( function() {
+$(document).ready(function() {
 	$('#create').submit( function(e){
 		e.preventDefault();
+		$(this).siblings().find('#create-results').remove('li');
+		
 		// zero out results if previous search has run
 		$('.create-results').html('');
-		// get the value of the tags the user submitted
-		var createitem = $(this).find("input[name='create-input']").val();
+		
+		// get the value of the Create search word
+		var createitem = $(this).find('#create-input').val();
+
 		createCrafts(createitem);
+
+		//clear Create search field
+		$('#create-input').val('');
 	});
 })

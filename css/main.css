@@ -17,6 +17,12 @@ form {
 }
 
 div.create-results {
-	height: 200px;
+	min-height: 200px;
 	border: 1px solid grey;
+}
+
+li {
+	list-style-type: none;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }

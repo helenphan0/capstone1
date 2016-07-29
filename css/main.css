@@ -3,7 +3,7 @@
 }
 
 main {
-	max-width: 550px;
+	max-width: 600px;
 	width: 90%;
 	border: 1px solid grey;
 	text-align: center;
@@ -12,17 +12,30 @@ main {
 	padding: 15px;
 }
 
+.hidden {
+	display: ;
+}
+
 form {
 	height: 50px;
 }
 
-div.create-results {
-	min-height: 200px;
-	border: 1px solid grey;
+ul {
+	min-height: 100px;
+	padding-left: 0px;
+
 }
 
 li {
 	list-style-type: none;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	display: inline-block;
+	max-width: 200px;
+	width: 95%;
+	max-height: 200px;
+	height: 95%;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: pre;
 }

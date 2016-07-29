@@ -1,24 +1,22 @@
 var createCrafts = function(createitem) {
 	
-	// the parameters we need to pass in our request to StackOverflow's API
 	var request = { 
 		api_key: 'mzuqxoiomej58vknkm90fssa',
 		limit: 10,
 		keywords: createitem,
 		sort_on: 'score',
 		sort_order: 'down',
-		includes: ['Images'],
 	};
 	
 	$.ajax({
-		url: "https://openapi.etsy.com/v2/listings/active.js",
+		url: "https://openapi.etsy.com/v2/listings/active.js?includes=Images:1",
 		data: request,
 		dataType: "jsonp",
 		type: "GET",
-		success: (function(data){ //this waits for the ajax to return with a succesful promise object
-			console.log(data);
+		success: (function(data){ 
 			$.each(data.results, function(i, item) {
-				$('#create-results').append('<li>' + item.title + ' ' +  '</li>');
+				var image = '<a href="' + item.url + '"><img src="' + item.Images[0].url_170x135 + '"></a>'
+				$('#create-results').append('<li>' + image + '<p>' + item.title + '</p>'  +  '</li>');
 			});
 		})
 	});
@@ -28,13 +26,14 @@ var createCrafts = function(createitem) {
 
 $(document).ready(function() {
 	$('#create').submit( function(e){
+
+		// Clear previous results' listings
+		$(this).siblings().find('li').remove();
+
+		// Prevent page reload
 		e.preventDefault();
-		$(this).siblings().find('#create-results').remove('li');
-		
-		// zero out results if previous search has run
-		$('.create-results').html('');
-		
-		// get the value of the Create search word
+
+		// Get the value of the Create search word
 		var createitem = $(this).find('#create-input').val();
 
 		createCrafts(createitem);

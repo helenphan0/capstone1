@@ -1,3 +1,5 @@
+
+
 var createCrafts = function(createitem) {
 	
 	var request = { 
@@ -5,18 +7,19 @@ var createCrafts = function(createitem) {
 		limit: 10,
 		keywords: createitem,
 		sort_on: 'score',
-		sort_order: 'down',
+		sort_order: 'down'
 	};
 	
 	$.ajax({
-		url: "https://openapi.etsy.com/v2/listings/active.js?includes=Images:1",
+		url: "https://openapi.etsy.com/v2/listings/active.js?includes=Images",
 		data: request,
 		dataType: "jsonp",
 		type: "GET",
 		success: (function(data){ 
 			$.each(data.results, function(i, item) {
-				var image = '<a href="' + item.url + '"><img src="' + item.Images[0].url_170x135 + '"></a>';
-				$('#create-results').append('<div>' + image + '<p>' + item.title + '</p>'  +  '</div>');
+				var image = '<img src="' + item.Images[0].url_170x135 + '">';
+				var title = item.title;
+				$('#create-results').append('<div class="etsy result">' + image + '<p>' + title + '</p>'  +  '</div>');
 			});
 		})
 	});
@@ -26,20 +29,21 @@ var learnCrafts = function(createitem) {
 	var request = {
 		part: 'snippet',
 		key: 'AIzaSyDnahmSz7sdcFj_jMe6pb-P5vPxdO9Me2A',
-		q: createitem,
+		q: 'how to make a ' + createitem,
 		r: 'json',
 	};
 	
 	$.ajax({
 		url: 'https://www.googleapis.com/youtube/v3/search',
 		data: request,
-		type: "GET",
-	//	dataType: 'json'
+		type: "GET"
 	})
 	.done(function(result){
 		$.each(result.items, function(i, item) {
-			var image = '<a href="https://www.youtube.com/watch?v=' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '"></a>';
-			$('#create-results').append('<div>' + image + '<p>' + item.snippet.title + '</p>'  +  '</div>');
+			var image = '<img src="' + item.snippet.thumbnails.medium.url + '">';
+			var title = item.snippet.title;
+			var divclass = "youtube";
+			$('#create-results').append('<div class="youtube result">' + image + '<p>' + title + '</p>'  +  '</div>');
 		});
 	});
 
@@ -52,8 +56,8 @@ $(document).ready(function() {
 
 		// Clear previous results' listings
 		$(this).siblings('div.resultbox').children('').remove();
-
-		// Prevent page reload
+		
+		// Prevent page reload	
 		e.preventDefault();
 
 		// Get the value of the Create search word
@@ -80,4 +84,14 @@ $(document).ready(function() {
 		//clear Create search field
 		$('#learn-input').val('');
 	});
+
+	/*--- Display information modal box ---*/
+  	$(".resultbox").on( "click", "div.result", function() {
+    	$(this).toggleClass('zoomhance');
+  	});
+
+  	/*--- Hide information modal box ---*/
+ // 	$("a.close").click(function(){
+ // 		$(".overlay").fadeOut(1000);
+ // 	});
 })

@@ -15,11 +15,34 @@ var createCrafts = function(createitem) {
 		type: "GET",
 		success: (function(data){ 
 			$.each(data.results, function(i, item) {
-				var image = '<a href="' + item.url + '"><img src="' + item.Images[0].url_170x135 + '"></a>'
-				$('#create-results').append('<li>' + image + '<p>' + item.title + '</p>'  +  '</li>');
+				var image = '<a href="' + item.url + '"><img src="' + item.Images[0].url_170x135 + '"></a>';
+				$('#create-results').append('<div>' + image + '<p>' + item.title + '</p>'  +  '</div>');
 			});
 		})
 	});
+};
+
+var learnCrafts = function(createitem) {
+	var request = {
+		part: 'snippet',
+		key: 'AIzaSyDnahmSz7sdcFj_jMe6pb-P5vPxdO9Me2A',
+		q: createitem,
+		r: 'json',
+	};
+	
+	$.ajax({
+		url: 'https://www.googleapis.com/youtube/v3/search',
+		data: request,
+		type: "GET",
+	//	dataType: 'json'
+	})
+	.done(function(result){
+		$.each(result.items, function(i, item) {
+			var image = '<a href="https://www.youtube.com/watch?v=' + item.id.videoId + '"><img src="' + item.snippet.thumbnails.medium.url + '"></a>';
+			$('#create-results').append('<div>' + image + '<p>' + item.snippet.title + '</p>'  +  '</div>');
+		});
+	});
+
 };
 
 
@@ -28,7 +51,7 @@ $(document).ready(function() {
 	$('#create').submit( function(e){
 
 		// Clear previous results' listings
-		$(this).siblings().find('li').remove();
+		$(this).siblings('div.resultbox').children('').remove();
 
 		// Prevent page reload
 		e.preventDefault();
@@ -40,5 +63,21 @@ $(document).ready(function() {
 
 		//clear Create search field
 		$('#create-input').val('');
+	});
+	$('#learn').submit( function(e){
+
+		// Clear previous results' listings
+		$(this).siblings('div.resultbox').children('').remove();
+
+		// Prevent page reload
+		e.preventDefault();
+
+		// Get the value of the Create search word
+		var createitem = $(this).find('#learn-input').val();
+
+		learnCrafts(createitem);
+
+		//clear Create search field
+		$('#learn-input').val('');
 	});
 })

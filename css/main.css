@@ -3,7 +3,7 @@
 }
 
 main {
-	max-width: 600px;
+	max-width: 700px;
 	width: 90%;
 	border: 1px solid grey;
 	text-align: center;
@@ -12,12 +12,15 @@ main {
 	padding: 15px;
 }
 
-.hidden {
-	display: ;
-}
 
 form {
-	height: 50px;
+	height: 40px;
+}
+
+input {
+	width: 400px;
+	height: 30px;
+	padding: 2px;
 }
 
 ul {
@@ -26,16 +29,20 @@ ul {
 
 }
 
-li {
-	list-style-type: none;
+#create-results>div {
 	margin-top: 5px;
 	margin-bottom: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
 	display: inline-block;
-	max-width: 200px;
+	max-width: 300px;
 	width: 95%;
-	max-height: 200px;
-	height: 95%;
 	overflow: hidden;
   	text-overflow: ellipsis;
   	white-space: pre;
+}
+
+div img {
+	height: 275px;
+	width: auto;
 }

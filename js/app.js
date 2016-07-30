@@ -19,7 +19,9 @@ var createCrafts = function(createitem) {
 			$.each(data.results, function(i, item) {
 				var image = '<img src="' + item.Images[0].url_170x135 + '">';
 				var title = item.title;
-				$('#create-results').append('<div class="etsy result">' + image + '<p>' + title + '</p>'  +  '</div>');
+				var details = '<div class="overlay"><div>' + title + '</div><div>' + item.tags + '</div><div>' + item.price + '</div><button type="button" class="make">' + "Make" + '</button><a class="close" href="#">' + 'Close' + '</a></div>';
+				$('#create-results').append('<div class="etsy result">' + image + '<p>' + title + '</p>' + details + '</div>');
+				$('div.details').hide();
 			});
 		})
 	});
@@ -40,7 +42,7 @@ var learnCrafts = function(createitem) {
 	})
 	.done(function(result){
 		$.each(result.items, function(i, item) {
-			var image = '<img src="' + item.snippet.thumbnails.medium.url + '">';
+			var image = '<img src="' + item.snippet.thumbnails.default.url + '">';
 			var title = item.snippet.title;
 			var divclass = "youtube";
 			$('#create-results').append('<div class="youtube result">' + image + '<p>' + title + '</p>'  +  '</div>');
@@ -85,13 +87,13 @@ $(document).ready(function() {
 		$('#learn-input').val('');
 	});
 
-	/*--- Display information modal box ---*/
-  	$(".resultbox").on( "click", "div.result", function() {
-    	$(this).toggleClass('zoomhance');
+	/*--- Display overlay for details ---*/
+  	$(".resultbox").on( "click", "img", function() {
+    	$(this).siblings(".overlay").fadeIn(1000);
   	});
 
-  	/*--- Hide information modal box ---*/
- // 	$("a.close").click(function(){
- // 		$(".overlay").fadeOut(1000);
- // 	});
+  	$(".resultbox").on( "click", "a.close", function() {
+  		$(".overlay").fadeOut(1000);
+  	});
+
 })

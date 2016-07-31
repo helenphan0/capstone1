@@ -1,4 +1,62 @@
 
+var showResults = function(resultItem) {
+
+	// clone our result template code
+	var etsyResult = $('.template .result').clone();
+
+	var imageThumb = etsyResult.children('img.resultImg');
+	imageThumb.attr('src', resultItem.Images[0].url_170x135);
+
+	var listingName = etsyResult.children('p.resultTitle');
+	listingName.text(resultItem.title);
+
+	var detailImage = etsyResult.find('.detailImg');
+	detailImage.attr('src', resultItem.Images[0].url_170x135);
+
+	var detailTitle = etsyResult.find('span.detailTitle');
+	detailTitle.text(resultItem.title);
+
+	var category = etsyResult.find('span.category');
+	category.text(resultItem.category_path);
+
+	var tags = etsyResult.find('span.tags');
+	tags.text(resultItem.tags);
+
+	var mat = etsyResult.find('span.materials')
+	mat.text(resultItem.materials);
+
+	var price = etsyResult.find('span.price');
+	price.text(resultItem.price + ' ' + resultItem.currency_code);
+
+	var desc = etsyResult.find('span.description');
+	desc.text(resultItem.description);
+
+	var purchase = etsyResult.find('.purchase');
+	purchase.attr('href', resultItem.url);
+
+	return etsyResult;
+};
+
+
+var videos = function(ytVideo) {
+
+	var ytResult = $('#youtube youtubeResult').clone();
+
+	var youtubeImg = ytResult.children('img.imageYT');
+	youtubeImg.attr('src', ytVideo.snippet.thumbnails.default.url);
+
+	var youtubeURL = "https://www.youtube.com/watch?v=" + ytVideo.id.videoID;
+	var youtubeLink  = ytResult.children('a.urlYT');
+	youtubeLink.attr('href', youtubeURL);
+
+	var youtubeTitle = ytResult.find('p.titleYT');
+	youtubeTitle.text(ytVideo.snippet.title);
+
+	var youtubeDesc = ytResult.find('span.descYT');
+	youtubeDesc.text(ytVideo.snippet.description);
+
+	return ytResult;
+};
 
 var createCrafts = function(createitem) {
 	
@@ -17,14 +75,15 @@ var createCrafts = function(createitem) {
 		type: "GET",
 		success: (function(data){ 
 			$.each(data.results, function(i, item) {
-				var image = '<img src="' + item.Images[0].url_170x135 + '">';
-				var title = item.title;
-				var details = '<div class="overlay"><div>' + title + '</div><div>' + item.tags + '</div><div>' + item.price + '</div><button type="button" class="make">' + "Make" + '</button><a class="close" href="#">' + 'Close' + '</a></div>';
-				$('#create-results').append('<div class="etsy result">' + image + '<p>' + title + '</p>' + details + '</div>');
-				$('div.details').hide();
+				var resultItem = showResults(item);
+				$('#create-results').append(resultItem);
 			});
+			learnCrafts(createitem);
 		})
 	});
+
+
+
 };
 
 var learnCrafts = function(createitem) {
@@ -42,10 +101,8 @@ var learnCrafts = function(createitem) {
 	})
 	.done(function(result){
 		$.each(result.items, function(i, item) {
-			var image = '<img src="' + item.snippet.thumbnails.default.url + '">';
-			var title = item.snippet.title;
-			var divclass = "youtube";
-			$('#create-results').append('<div class="youtube result">' + image + '<p>' + title + '</p>'  +  '</div>');
+			var ytVideo = videos(item)
+			$('#youtube').append(ytVideo);
 		});
 	});
 
@@ -54,10 +111,10 @@ var learnCrafts = function(createitem) {
 
 
 $(document).ready(function() {
-	$('#create').submit( function(e){
+	$('#create').submit(function(e){
 
 		// Clear previous results' listings
-		$(this).siblings('div.resultbox').children('').remove();
+		$(this).siblings('#create-results').empty();
 		
 		// Prevent page reload	
 		e.preventDefault();
@@ -70,30 +127,18 @@ $(document).ready(function() {
 		//clear Create search field
 		$('#create-input').val('');
 	});
-	$('#learn').submit( function(e){
-
-		// Clear previous results' listings
-		$(this).siblings('div.resultbox').children('').remove();
-
-		// Prevent page reload
-		e.preventDefault();
-
-		// Get the value of the Create search word
-		var createitem = $(this).find('#learn-input').val();
-
-		learnCrafts(createitem);
-
-		//clear Create search field
-		$('#learn-input').val('');
-	});
-
+	
 	/*--- Display overlay for details ---*/
-  	$(".resultbox").on( "click", "img", function() {
+  	$("#create-results").on( "click", "img.resultImg", function() {
     	$(this).siblings(".overlay").fadeIn(1000);
   	});
 
-  	$(".resultbox").on( "click", "a.close", function() {
+  	$("#create-results").on( "click", "a.close", function() {
   		$(".overlay").fadeOut(1000);
+  	});
+
+  	$('#create-results').on('click', 'button.panel', function() {
+  		$(this).siblings('#youtube').slideToggle();
   	});
 
 })

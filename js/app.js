@@ -8,28 +8,28 @@ var showResults = function(resultItem) {
 	imageThumb.attr('src', resultItem.Images[0].url_170x135);
 
 	var listingName = etsyResult.children('p.resultTitle');
-	listingName.text(resultItem.title);
+	listingName.html(resultItem.title);
 
 	var detailImage = etsyResult.find('.detailImg');
 	detailImage.attr('src', resultItem.Images[0].url_170x135);
 
 	var detailTitle = etsyResult.find('span.detailTitle');
-	detailTitle.text(resultItem.title);
+	detailTitle.html(resultItem.title);
 
 	var category = etsyResult.find('span.category');
-	category.text(resultItem.category_path);
+	category.html(resultItem.category_path);
 
 	var tags = etsyResult.find('span.tags');
-	tags.text(resultItem.tags);
+	tags.html(resultItem.tags);
 
 	var mat = etsyResult.find('span.materials')
-	mat.text(resultItem.materials);
+	mat.html(resultItem.materials);
 
-	var price = etsyResult.find('span.price');
+	var price = etsyResult.find('p.price');
 	price.text(resultItem.price + ' ' + resultItem.currency_code);
 
 	var desc = etsyResult.find('span.description');
-	desc.text(resultItem.description);
+	desc.html(resultItem.description);
 
 	var purchase = etsyResult.find('.purchase');
 	purchase.attr('href', resultItem.url);
@@ -40,12 +40,12 @@ var showResults = function(resultItem) {
 
 var videos = function(ytVideo) {
 
-	var ytResult = $('#youtube youtubeResult').clone();
+	var ytResult = $('#youtube .youtubeResult').clone();
 
 	var youtubeImg = ytResult.children('img.imageYT');
 	youtubeImg.attr('src', ytVideo.snippet.thumbnails.default.url);
 
-	var youtubeURL = "https://www.youtube.com/watch?v=" + ytVideo.id.videoID;
+	var youtubeURL = "https://www.youtube.com/watch?v=" + ytVideo.id.videoId;
 	var youtubeLink  = ytResult.children('a.urlYT');
 	youtubeLink.attr('href', youtubeURL);
 
@@ -77,10 +77,11 @@ var createCrafts = function(createitem) {
 			$.each(data.results, function(i, item) {
 				var resultItem = showResults(item);
 				$('#create-results').append(resultItem);
+				
 			});
-			learnCrafts(createitem);
 		})
 	});
+
 
 
 
@@ -123,6 +124,7 @@ $(document).ready(function() {
 		var createitem = $(this).find('#create-input').val();
 
 		createCrafts(createitem);
+		learnCrafts(createitem);
 
 		//clear Create search field
 		$('#create-input').val('');
@@ -137,7 +139,7 @@ $(document).ready(function() {
   		$(".overlay").fadeOut(1000);
   	});
 
-  	$('#create-results').on('click', 'button.panel', function() {
+  	$('#create-results').on('click', 'button.panel', function(createitem) {
   		$(this).siblings('#youtube').slideToggle();
   	});
 

@@ -41,6 +41,7 @@ input {
 	width: 80%;
 	height: 35px;
 	padding: 2px;
+	background-color: #F5F5F5;
 }
 
 button {
@@ -51,6 +52,8 @@ button {
 	padding-bottom: 2px;
 	padding-left: 7px;
 	padding-right: 7px;
+	background-color: #C71585;
+	border: 0;
 }
 
 
@@ -59,24 +62,32 @@ button {
 	margin-bottom: 5px;
 	margin-left: 2px;
 	margin-right: 2px;
+	padding-top: 4px;
 	display: inline-block;
+	border: 1px solid pink;
+	border-radius: 3px;
 	position: relative;
 	max-width: 600px;
-	width: 45%;
+	width: 43%;
 }
 
 .result>p {
 	display: inline-block;
-	position: absolute;
-	left: 25px;
-	bottom: 10px;
-	max-width: 230px;
+	position: relative;
+	max-width: 250px;
 	width: 99%;
 	height: 20px;
+	margin: 1px;
 	background-color: white;
 	overflow: hidden;
   	text-overflow: ellipsis;
   	white-space: nowrap;
+}
+
+p.price {
+	float: right;
+	width: 50%;
+	color: #9ACD32;
 }
 
 .result>img {
@@ -90,6 +101,7 @@ button {
 	width: 99%;
 	height: auto;  
 	background: #EEB4B4;
+	border-radius: 3px;
 	position: fixed;    
 	top: 0;
 	left: 0;
@@ -97,13 +109,15 @@ button {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-right: 5px;
-	padding-left: 2px;
+	padding-left: 5px;
 	z-index: 1000;
 	display: none;
 }
 
 .overlay button {
 	width: auto;
+	display: block;
+	margin-left: 20px;
 }
 
 .hidden, #youtube {
@@ -139,8 +153,9 @@ button {
 p.description {
 	overflow: hidden;
   	text-overflow: ellipsis;
-  	height: 200px;
-  	font-size: 14px;
+  	max-height: 200px;
+  	height: 90%;
+  	
 }
 
 
@@ -167,8 +182,6 @@ p.description {
 	}
 
 	.result p {
-		top: 10px;
-		left: 55px;
 		width: 100%;
 	}
 

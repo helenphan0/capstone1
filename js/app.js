@@ -17,13 +17,13 @@ var showResults = function(resultItem) {
 	detailTitle.html(resultItem.title);
 
 	var category = etsyResult.find('span.category');
-	category.html(resultItem.category_path);
+	category.html(resultItem.category_path.join(', '));
 
 	var tags = etsyResult.find('span.tags');
-	tags.html(resultItem.tags);
+	tags.html(resultItem.tags.join(', '));
 
 	var mat = etsyResult.find('span.materials')
-	mat.html(resultItem.materials);
+	mat.html(resultItem.materials.join(', '));
 
 	var price = etsyResult.find('p.price');
 	price.text(resultItem.price + ' ' + resultItem.currency_code);
@@ -48,6 +48,7 @@ var videos = function(ytVideo) {
 	var youtubeURL = "https://www.youtube.com/watch?v=" + ytVideo.id.videoId;
 	var youtubeLink  = ytResult.children('a.urlYT');
 	youtubeLink.attr('href', youtubeURL);
+	youtubeLink.attr('target', '_blank');
 
 	var youtubeTitle = ytResult.find('p.titleYT');
 	youtubeTitle.text(ytVideo.snippet.title);
@@ -101,9 +102,10 @@ var learnCrafts = function(createitem) {
 		type: "GET"
 	})
 	.done(function(result){
+		$('.youtubeResults').html('');
 		$.each(result.items, function(i, item) {
 			var ytVideo = videos(item)
-			$('#create-results').find('.youtube').append(ytVideo);
+			$('.youtubeResults').append(ytVideo);
 		});
 	});
 
@@ -115,7 +117,6 @@ $(document).ready(function() {
 	$('#create').submit(function(e){
 
 		// Clear previous results' listings
-		$(this).parent().children('#create-results').find('.youtube').empty();
 		$('#create').siblings('#create-results').empty();
 
 		
@@ -142,7 +143,7 @@ $(document).ready(function() {
   	});
 
   	$('#create-results').on('click', 'button.panel', function(createitem) {
-  		$(this).siblings('.youtube').slideToggle();
+  		$(this).siblings('.youtubeResults').slideToggle();
   	});
 
 })

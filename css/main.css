@@ -41,6 +41,7 @@ input {
 	width: 80%;
 	height: 35px;
 	padding: 2px;
+	border-radius: 3px;
 	background-color: #F5F5F5;
 }
 
@@ -52,6 +53,7 @@ button {
 	padding-bottom: 2px;
 	padding-left: 7px;
 	padding-right: 7px;
+	border-radius: 3px;
 	background-color: #C71585;
 	border: 0;
 }
@@ -96,12 +98,16 @@ p.price {
 	height: auto;
 }
 
+.result>img:hover {
+	opacity: .5;
+}
+
 .overlay {
 	max-width: 550px;
 	width: 99%;
 	height: auto;  
 	background: #EEB4B4;
-	border-radius: 3px;
+	border-radius: 4px;
 	position: fixed;    
 	top: 0;
 	left: 0;
@@ -120,13 +126,11 @@ p.price {
 	margin-left: 20px;
 }
 
-.hidden, #youtube {
+.hidden, .youtube {
 	display: none;
 }
 
-#youtube {
 
-}
 
 .overlay>img {
 	max-width: 200px;
@@ -156,6 +160,22 @@ p.description {
   	max-height: 200px;
   	height: 90%;
   	
+}
+
+.youtubeResult {
+	display: inline-block;
+	max-width: 230px;
+	width: 99%;
+}
+.youtubeResult>img {
+	float: left;
+	margin: 3px;
+}
+
+.youtubeResult a, .youtubeResult p {
+	text-align: left;
+	font-size: 12px;
+
 }
 
 

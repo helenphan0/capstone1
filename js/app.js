@@ -40,7 +40,7 @@ var showResults = function(resultItem) {
 
 var videos = function(ytVideo) {
 
-	var ytResult = $('#youtube .youtubeResult').clone();
+	var ytResult = $('.youtube>.youtubeResult').clone();
 
 	var youtubeImg = ytResult.children('img.imageYT');
 	youtubeImg.attr('src', ytVideo.snippet.thumbnails.default.url);
@@ -103,7 +103,7 @@ var learnCrafts = function(createitem) {
 	.done(function(result){
 		$.each(result.items, function(i, item) {
 			var ytVideo = videos(item)
-			$('#youtube').append(ytVideo);
+			$('#create-results').find('.youtube').append(ytVideo);
 		});
 	});
 
@@ -115,7 +115,9 @@ $(document).ready(function() {
 	$('#create').submit(function(e){
 
 		// Clear previous results' listings
-		$(this).siblings('#create-results').empty();
+		$(this).parent().children('#create-results').find('.youtube').empty();
+		$('#create').siblings('#create-results').empty();
+
 		
 		// Prevent page reload	
 		e.preventDefault();
@@ -140,7 +142,7 @@ $(document).ready(function() {
   	});
 
   	$('#create-results').on('click', 'button.panel', function(createitem) {
-  		$(this).siblings('#youtube').slideToggle();
+  		$(this).siblings('.youtube').slideToggle();
   	});
 
 })

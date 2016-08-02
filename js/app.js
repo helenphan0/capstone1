@@ -25,7 +25,7 @@ var showResults = function(resultItem) {
 	var mat = etsyResult.find('span.materials')
 	mat.html(resultItem.materials.join(', '));
 
-	var price = etsyResult.find('p.price');
+	var price = etsyResult.find('span.price');
 	price.text(resultItem.price + ' ' + resultItem.currency_code);
 
 	var desc = etsyResult.find('span.description');
@@ -82,10 +82,6 @@ var createCrafts = function(createitem) {
 			});
 		})
 	});
-
-
-
-
 };
 
 var learnCrafts = function(createitem) {
@@ -119,7 +115,6 @@ $(document).ready(function() {
 		// Clear previous results' listings
 		$('#create').siblings('#create-results').empty();
 
-		
 		// Prevent page reload	
 		e.preventDefault();
 
@@ -141,6 +136,12 @@ $(document).ready(function() {
   	$("#create-results").on( "click", "a.close", function() {
   		$(".overlay").fadeOut(1000);
   	});
+
+	$(document).bind('keydown',function(e){
+	  if ( e.which == 27 ) {
+	     $(".overlay").fadeOut(1000);
+	  };
+	});
 
   	$('#create-results').on('click', 'button.panel', function(createitem) {
   		$(this).siblings('.youtubeResults').slideToggle();

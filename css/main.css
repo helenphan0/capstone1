@@ -25,8 +25,7 @@ a {
 
 main {
 	background-color: white;
-	max-width: 700px;
-	width: 95%;
+	width: 75%;
 	min-height: 400px;
 	border-radius: 5px;
 	text-align: center;
@@ -36,46 +35,44 @@ main {
 	padding: 15px;
 }
 
-
 form {
-	height: 40px;
+	margin-bottom: 10px;
 }
 
 input {
-	max-width: 370px;
+	max-width: 400px;
 	width: 80%;
-	height: 35px;
-	padding: 2px;
-	border-radius: 3px;
+	height: 45px;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 18px;
 	background-color: #F5F5F5;
+	vertical-align: bottom;
 }
 
 button {
 	display: inline-block;
-	height: 34px;
+	height: 45px;
 	width: 15%;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 7px;
-	padding-right: 7px;
-	border-radius: 3px;
+	padding: 3px 9px;
+	border-radius: 4px;
 	background-color: #C71585;
 	border: 0;
 }
 
+button:hover {
+	cursor: pointer;
+}
 
 .result {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 2px;
-	margin-right: 2px;
-	padding-top: 4px;
+	margin: 5px 2px;
 	display: inline-block;
 	border: 1px solid pink;
 	border-radius: 3px;
 	position: relative;
-	max-width: 600px;
-	width: 43%;
+	max-width: 250px;
+	min-height: 253px;
+	vertical-align: top;
 }
 
 .result>p {
@@ -83,29 +80,34 @@ button {
 	position: relative;
 	max-width: 250px;
 	width: 99%;
-	height: 20px;
-	margin: 1px;
+	margin: 2px;
 	background-color: white;
+	text-align: left;
+	padding: 0 8px;
+	height: 70px;
 	overflow: hidden;
-  	text-overflow: ellipsis;
-  	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
+
 p.price {
-	float: right;
-	width: 50%;
+	text-align: right;
+	height: 16px;
+	padding-right: 10px;
+	padding-bottom: 3px;
 	color: #9ACD32;
 }
 
-
 .result>img {
 	max-width: 400px;
-	width: 90%;
+	max-height: 200px;
+	width: 100%;
 	height: auto;
 }
 
 .result>img:hover {
 	opacity: .5;
+	cursor: pointer;
 }
 
 .overlay {
@@ -117,19 +119,23 @@ p.price {
 	top: 0;
 	left: 10%;
 	margin: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 5px;
-	padding-left: 5px;
+	padding: 10px 5px;
 	z-index: 1000;
 	display: none;
 }
 
+
+.desc {
+	display: inline-block;
+	width: 60%;
+}
+
+a.purchase {
+	position: relative;
+}
+
 .overlay button {
 	width: auto;
-	display: block;
-	left: 30%;
-	margin-left: 20px;
 }
 
 .hidden, .youtube {
@@ -138,21 +144,30 @@ p.price {
 
 
 .overlay>img {
+	display: inline-block;
 	max-width: 200px;
 	width: 99%;
-	display: block;
+	float: left;
 	margin-left: 25px;
 	padding: 5px;
+
 }
 
-.overlay>p {
-	display: inline-block;
-	max-width: 600px;
-	width: 90%;
-	padding: 5px;
-	margin-top: 2px;
-	margin-bottom: 2px;
+p.description {
+	max-width: 550px;
+	width: 99%;
+	height: 70px;
+	padding-right: 5px;
+	padding-left: 5px;
 	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+p.detailTitle {
+	display: block;
+	width: 90%;
+	margin: auto;
 }
 
 .overlay>a.close {
@@ -164,9 +179,8 @@ p.price {
 p.description {
 	overflow: hidden;
   	text-overflow: ellipsis;
-  	max-height: 200px;
-  	height: 90%;
-  	
+  	max-height: 115px;
+  
 }
 
 .youtubeResult {
@@ -232,9 +246,10 @@ p.description {
 		width: 70%;
 	}
 
-	.overlay>img {
-		margin: auto;
-	}
+/*	.overlay {
+		position: absolute;
+	}  */
+
 
 	.overlay button {
 		display: inline-block;

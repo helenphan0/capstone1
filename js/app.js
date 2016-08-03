@@ -16,19 +16,10 @@ var showResults = function(resultItem) {
 	var detailTitle = etsyResult.find('span.detailTitle');
 	detailTitle.html(resultItem.title);
 
-	var category = etsyResult.find('span.category');
-	category.html(resultItem.category_path.join(', '));
-
-	var tags = etsyResult.find('span.tags');
-	tags.html(resultItem.tags.join(', '));
-
-	var mat = etsyResult.find('span.materials')
-	mat.html(resultItem.materials.join(', '));
-
-	var price = etsyResult.find('span.price');
+	var price = etsyResult.find('p.price');
 	price.text(resultItem.price + ' ' + resultItem.currency_code);
 
-	var desc = etsyResult.find('span.description');
+	var desc = etsyResult.find('p.description');
 	desc.html(resultItem.description);
 
 	var purchase = etsyResult.find('.purchase');

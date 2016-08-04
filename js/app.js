@@ -33,8 +33,8 @@ var videos = function(ytVideo) {
 
 	var ytResult = $('.youtube>.youtubeResult').clone();
 
-	var youtubeImg = ytResult.children('img.imageYT');
-	youtubeImg.attr('src', ytVideo.snippet.thumbnails.default.url);
+	var youtubeImg = ytResult.find('img.imageYT');
+	youtubeImg.attr('src', ytVideo.snippet.thumbnails.high.url);
 
 	var youtubeURL = "https://www.youtube.com/watch?v=" + ytVideo.id.videoId;
 	var youtubeLink  = ytResult.children('a.urlYT');
@@ -44,8 +44,8 @@ var videos = function(ytVideo) {
 	var youtubeTitle = ytResult.find('p.titleYT');
 	youtubeTitle.text(ytVideo.snippet.title);
 
-	var youtubeDesc = ytResult.find('span.descYT');
-	youtubeDesc.text(ytVideo.snippet.description);
+//	var youtubeDesc = ytResult.find('span.descYT');
+//	youtubeDesc.text(ytVideo.snippet.description);
 
 	return ytResult;
 };

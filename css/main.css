@@ -10,7 +10,6 @@ body {
 	background-position: right 1px top 1px, bottom 1px left 1px;
 	background-repeat: no-repeat, no-repeat;
 	background-size: 50%, 50% ;
-
 }
 
 a {
@@ -33,6 +32,8 @@ main {
 	margin-top: 55px;
 	margin-bottom: 50px;
 	padding: 15px;
+	-webkit-box-shadow: 0 0 10px .5px #7A736A;
+	box-shadow: 0 0 10px .5px #7A736A;
 }
 
 form {
@@ -55,12 +56,14 @@ button {
 	height: 45px;
 	width: 15%;
 	padding: 3px 9px;
-	border-radius: 4px;
-	background-color: #C71585;
+	border-radius: 5px;
+	background-color: #F18896;
 	border: 0;
 }
 
 button:hover {
+	transition: 0.3s background-color;
+	background-color: #FBA7A7;
 	cursor: pointer;
 }
 
@@ -113,7 +116,7 @@ p.price {
 .overlay {
 	width: 80%;
 	height: auto;  
-	background: #EEB4B4;
+	background: #FFFFD6;
 	border-radius: 4px;
 	position: fixed;    
 	top: 0;
@@ -122,6 +125,7 @@ p.price {
 	padding: 10px 5px;
 	z-index: 1000;
 	display: none;
+	overflow: auto;
 }
 
 
@@ -185,22 +189,29 @@ p.description {
 
 .youtubeResult {
 	display: inline-block;
-	max-width: 300px;
+	max-width: 200px;
 	max-height: 300px;
-	width: 99%;
+
 	margin: 7px;
-	padding: 5px;
 	background-color: #F5F5F5;
-	border-radius: 4px;
-}
-.youtubeResult>img {
-	float: left;
-	margin: 3px;
+	border-radius: 2px;
+	vertical-align: top;
 }
 
-.youtubeResult a, .youtubeResult p {
+
+img.imageYT {
+	width: 100%;
+
+}
+
+.youtubeResult p {
 	text-align: left;
 	font-size: 15px;
+	margin: 0 3px;
+	min-height: 45px;
+	max-height: 45px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
 
 }
 
@@ -223,38 +234,26 @@ p.description {
 	input{
 		width: 60%
 	}
+
 	button {
 		width: 25%;
 	}
+
 	.youtubeResult {
 		width: 60%;
-	}
-
-	p.descYT {
-		display: none;
-	}
-
-	.imageYT {
-		width: 90%;
-	}
-
-	a.titleYT {
-		display: inline-block;
 	}
 
 	.logo {
 		width: 70%;
 	}
 
-/*	.overlay {
-		position: absolute;
-	}  */
-
+	.youtubeResult>img {
+		width: 100%;
+	}  
 
 	.overlay button {
 		display: inline-block;
-		margin-left: auto;
-		margin-right: auto;
+		margin: auto;
 	}
 
 }	

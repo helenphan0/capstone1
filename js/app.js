@@ -44,9 +44,6 @@ var videos = function(ytVideo) {
 	var youtubeTitle = ytResult.find('p.titleYT');
 	youtubeTitle.text(ytVideo.snippet.title);
 
-//	var youtubeDesc = ytResult.find('span.descYT');
-//	youtubeDesc.text(ytVideo.snippet.description);
-
 	return ytResult;
 };
 
@@ -119,23 +116,36 @@ $(document).ready(function() {
 		$('#create-input').val('');
 	});
 	
-	/*--- Display overlay for details ---*/
+	/*--- Display pop up with details ---*/
   	$("#create-results").on( "click", "img.resultImg", function() {
     	$(this).siblings(".overlay").fadeIn(1000);
   	});
 
+	/*--- Display overlay behind details ---*/
+  	$(document).on( "click", "img.resultImg", function() {
+    	$(".grey-out").fadeIn(1000);
+  	});
+
+  	/*--- Close out of detail box with corner icon --*/
   	$("#create-results").on( "click", "a.close", function() {
   		$(".overlay").fadeOut(1000);
   	});
 
+  	$(document).on( "click", "a.close", function() {
+  		$(".grey-out").fadeOut(1000);
+  	});
+
+  	/*--- Press ESC to close detail box ---*/
 	$(document).bind('keydown',function(e){
 	  if ( e.which == 27 ) {
 	     $(".overlay").fadeOut(1000);
+	     $(".grey-out").fadeOut(1000);
 	  };
 	});
 
-  	$('#create-results').on('click', 'button.panel', function(createitem) {
-  		$(this).siblings('.youtubeResults').slideToggle();
+  	$('.grey-out').click(function() {
+  		$('.overlay').fadeOut(1000);
+	    $('.grey-out').fadeOut(1000);
   	});
 
 })

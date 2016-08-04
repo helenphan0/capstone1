@@ -191,7 +191,6 @@ p.description {
 	display: inline-block;
 	max-width: 200px;
 	max-height: 300px;
-
 	margin: 7px;
 	background-color: #F5F5F5;
 	border-radius: 2px;
@@ -201,7 +200,6 @@ p.description {
 
 img.imageYT {
 	width: 100%;
-
 }
 
 .youtubeResult p {
@@ -212,7 +210,27 @@ img.imageYT {
 	max-height: 45px;
 	overflow: hidden;
   	text-overflow: ellipsis;
+}
 
+
+a.urlYT:before {
+	font-family: FontAwesome;
+	content:"\f03d";
+	color: white;
+	font-size: 45px;
+	position: absolute;
+	padding-left: 60px;
+	padding-top: 50px;
+	opacity: 0;
+	transition: all 200ms ease;
+}
+
+a.urlYT:hover:before {
+	opacity: 1;
+}
+
+a.urlYT:hover {
+	opacity: .6;
 }
 
 

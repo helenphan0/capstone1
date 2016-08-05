@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
 
 body {
@@ -87,7 +87,8 @@ button:hover {
 	background-color: white;
 	text-align: left;
 	padding: 0 8px;
-	height: 70px;
+	height: 66px;
+	font-size: 14px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }

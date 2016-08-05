@@ -13,7 +13,7 @@ var showResults = function(resultItem) {
 	var detailImage = etsyResult.find('.detailImg');
 	detailImage.attr('src', resultItem.Images[0].url_170x135);
 
-	var detailTitle = etsyResult.find('span.detailTitle');
+	var detailTitle = etsyResult.find('p.detailTitle');
 	detailTitle.html(resultItem.title);
 
 	var price = etsyResult.find('p.price');
@@ -51,7 +51,7 @@ var createCrafts = function(createitem) {
 	
 	var request = { 
 		api_key: 'mzuqxoiomej58vknkm90fssa',
-		limit: 10,
+		limit: 12,
 		keywords: createitem,
 		sort_on: 'score',
 		sort_order: 'down'
@@ -144,8 +144,8 @@ $(document).ready(function() {
 	});
 
   	$('.grey-out').click(function() {
-  		$('.overlay').fadeOut(1000);
-	    $('.grey-out').fadeOut(1000);
+  		$('.overlay').fadeOut(300);
+	    $('.grey-out').fadeOut(300);
   	});
 
 })

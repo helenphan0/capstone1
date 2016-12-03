@@ -25,6 +25,19 @@ var showResults = function(resultItem) {
 	var purchase = etsyResult.find('.purchase');
 	purchase.attr('href', resultItem.url);
 
+	var tags = etsyResult.find('.tags');
+	tags.attr('data-tags', resultItem.tags);
+	var tagButtons;
+	if (resultItem.tags && resultItem.tags.length) {
+		tagButtons = $.map(resultItem.tags, function(item, i) {
+			return '<span class="word" data-word="' + item + '">' + item + '</span>'
+		});
+	}
+	else {
+		tagButtons = 'There are no tags associated with this Etsy listing.'
+	}
+	tags.append(tagButtons);
+
 	return etsyResult;
 };
 
@@ -47,7 +60,7 @@ var videos = function(ytVideo) {
 	return ytResult;
 };
 
-var createCrafts = function(createitem) {
+var findCrafts = function(createitem) {
 	
 	var request = { 
 		api_key: 'mzuqxoiomej58vknkm90fssa',
@@ -72,11 +85,12 @@ var createCrafts = function(createitem) {
 	});
 };
 
-var learnCrafts = function(createitem) {
+var learnCrafts = function(createitem, tags) {
+	var query = howto + createitem + ' ' + tags;
 	var request = {
 		part: 'snippet',
 		key: 'AIzaSyDnahmSz7sdcFj_jMe6pb-P5vPxdO9Me2A',
-		q: 'how to make a ' + createitem,
+		q: query,
 		r: 'json',
 	};
 	
@@ -88,16 +102,26 @@ var learnCrafts = function(createitem) {
 	.done(function(result){
 		$('.youtubeResults').html('');
 		$.each(result.items, function(i, item) {
-			var ytVideo = videos(item)
+			var ytVideo = videos(item);
 			$('.youtubeResults').append(ytVideo);
 		});
 	});
-
 };
 
+var findOne = function (items, searchList) {
+    return searchList.some(function (v) {
+        return items.indexOf(v) >= 0;
+    });
+};
 
+var createitem;
+var tagsArr = [];
+var resultTags;
+var howto = "how to make a ";
 
 $(document).ready(function() {
+
+	// Front page search input submission
 	$('#create').submit(function(e){
 
 		// Clear previous results' listings
@@ -107,10 +131,10 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		// Get the value of the Create search word
-		var createitem = $(this).find('#create-input').val();
+		createitem = $(this).find('#create-input').val();
 
-		createCrafts(createitem);
-		learnCrafts(createitem);
+		findCrafts(createitem);
+	//	learnCrafts(createitem, '');
 
 		//clear Create search field
 		$('#create-input').val('');
@@ -118,34 +142,63 @@ $(document).ready(function() {
 	
 	/*--- Display pop up with details ---*/
   	$("#create-results").on( "click", "img.resultImg", function() {
-    	$(this).siblings(".overlay").fadeIn(1000);
+    	learnCrafts(createitem, '');
+
+    	$(this).siblings(".overlay").fadeIn(300);
+    	$(".grey-out").fadeIn(300);
   	});
 
-	/*--- Display overlay behind details ---*/
-  	$(document).on( "click", "img.resultImg", function() {
-    	$(".grey-out").fadeIn(1000);
-  	});
+	$(document).on("click", "p.refine-text", function() {
+    	$(this).siblings('div.refine').toggleClass('hidden');
+    });
+
+  	$(document).on("click", "span.word", function() {
+		$(this).toggleClass('selected');
+
+		if ($(this).attr("class") == "word selected") {
+			tagsArr.push($(this).attr("data-word"));
+			resultTags = tagsArr.join(', ');
+		}
+		else if ($(this).attr("class") == "word") {
+			var word = $(this).attr('data-word');
+			var index = tagsArr.indexOf(word);
+			if (index > -1) {
+				tagsArr.splice(index, 1);
+			}
+			resultTags = tagsArr.join(', ');
+		}	
+	})
+
+	$(document).on("click", "button.refine-button", function() {
+		resultTags = resultTags || '';
+		console.log(howto, createitem, resultTags);
+		learnCrafts(createitem, resultTags);
+	})
 
   	/*--- Close out of detail box with corner icon --*/
-  	$("#create-results").on( "click", "a.close", function() {
-  		$(".overlay").fadeOut(1000);
-  	});
-
   	$(document).on( "click", "a.close", function() {
-  		$(".grey-out").fadeOut(1000);
+  		tagsArr = [];
+  		resultTags = '';
+  		$(".overlay").fadeOut(300);
+  		$(".grey-out").fadeOut(300);
   	});
 
   	/*--- Press ESC to close detail box ---*/
 	$(document).bind('keydown',function(e){
-	  if ( e.which == 27 ) {
-	     $(".overlay").fadeOut(1000);
-	     $(".grey-out").fadeOut(1000);
-	  };
+		if ( e.which == 27 ) {
+			tagsArr = [];
+			resultTags = '';
+		    $(".overlay").fadeOut(300);
+		    $(".grey-out").fadeOut(300);
+		};
 	});
 
   	$('.grey-out').click(function() {
+  		tagsArr = [];
+  		resultTags = '';
   		$('.overlay').fadeOut(300);
 	    $('.grey-out').fadeOut(300);
+	    $('.youtubeResults').html('');
   	});
 
 })

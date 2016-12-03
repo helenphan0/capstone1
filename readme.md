@@ -14,7 +14,13 @@ A user can view additional details by clicking on a search result item. This ope
 
 ![](img/itemdesc.png)
 
+
+
+Users can fine tune the youtube tutorials by adding the tags from the item's Etsy listing to generate a new youtube tutorial search.
+
+
+
 # Technology
 
-- This site uses HTML and CSS to present its contents in an attractive and responsive theme appealing to its constituents. 
+- This site uses HTML and CSS to present its contents in an attractive and responsive theme. 
 - This site also utilizes JavaScript and jQuery to retrieve data from both Etsy's and YouTube's APIs via AJAX. 

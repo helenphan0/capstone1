@@ -320,13 +320,24 @@ p.refine-text, .word:hover {
 
 @media only screen and (max-width: 610px) {
 
+	main {
+		width: 95%;
+	}
+
 	.result {
+		max-width: 400px;
 		width: 100%;
 	}
 
 	.result>img {
+		max-width: 400px;
+		max-height: 300px;
 		width: 100%;
 		height: auto;
+	}
+
+	p.resultTitle {
+		max-width: 380px;
 	}
 
 	input{

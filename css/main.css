@@ -129,7 +129,7 @@ p.price {
 	top: 23px;
 	left: 10%;
 	margin: 20px;
-	padding: 20px 5px;
+	padding: 18px 5px;
 	z-index: 1000;
 	display: none;
 	overflow: auto;
@@ -224,7 +224,7 @@ p.detailTitle {
 .overlay>a.close {
 	float: right;
 	display: inline-block;
-	padding-right: 10px;
+	padding-right: 15px;
 }
 
 .youtubeResult {
@@ -388,7 +388,7 @@ p.refine-text, .word:hover {
 
 	.overlay button {
 		display: inline-block;
-		margin: auto;
+		margin: 10px auto;
 	}
 
 	p.refine-text {

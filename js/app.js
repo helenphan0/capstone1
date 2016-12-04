@@ -79,7 +79,6 @@ var findCrafts = function(createitem) {
 			$.each(data.results, function(i, item) {
 				var resultItem = showResults(item);
 				$('#create-results').append(resultItem);
-				
 			});
 		})
 	});
@@ -108,12 +107,6 @@ var learnCrafts = function(createitem, tags) {
 	});
 };
 
-var findOne = function (items, searchList) {
-    return searchList.some(function (v) {
-        return items.indexOf(v) >= 0;
-    });
-};
-
 var createitem;
 var tagsArr = [];
 var resultTags;
@@ -134,7 +127,6 @@ $(document).ready(function() {
 		createitem = $(this).find('#create-input').val();
 
 		findCrafts(createitem);
-	//	learnCrafts(createitem, '');
 
 		//clear Create search field
 		$('#create-input').val('');
@@ -148,17 +140,21 @@ $(document).ready(function() {
     	$(".grey-out").fadeIn(300);
   	});
 
+  	// View tags on Etsy listing
 	$(document).on("click", "p.refine-text", function() {
     	$(this).siblings('div.refine').toggleClass('hidden');
     });
 
+	// Click on tag to add to search string
   	$(document).on("click", "span.word", function() {
 		$(this).toggleClass('selected');
 
+		// If word is highlighted, add it to array of new search words
 		if ($(this).attr("class") == "word selected") {
 			tagsArr.push($(this).attr("data-word"));
 			resultTags = tagsArr.join(', ');
 		}
+		// If word is not highlighted, remove from array
 		else if ($(this).attr("class") == "word") {
 			var word = $(this).attr('data-word');
 			var index = tagsArr.indexOf(word);
@@ -169,10 +165,14 @@ $(document).ready(function() {
 		}	
 	})
 
-	$(document).on("click", "button.refine-button", function() {
+  	// Generate new Youtube tutorial search to include selected tags
+	$(document).on("submit", "form.refine-search-form", function(event) {
+		event.preventDefault();
+		var tagsInput = $(this).children('input.tags-input');
 		resultTags = resultTags || '';
-		console.log(howto, createitem, resultTags);
+		resultTags += (tagsInput.val() ? ' ' + tagsInput.val() : '');
 		learnCrafts(createitem, resultTags);
+		tagsInput.val('');
 	})
 
   	/*--- Close out of detail box with corner icon --*/

@@ -17,9 +17,17 @@ a {
 }
 
 .logo {
+	height: auto;
+	margin: 15px;
 	max-width: 410px;
 	width: 99%;
-	height: auto;
+}
+
+p.index {
+	font-size: 17px;
+	display: inline-block;
+	margin: 10px;
+	width: 70%;
 }
 
 main {
@@ -37,7 +45,7 @@ main {
 }
 
 form {
-	margin-bottom: 10px;
+	margin: 17px;
 }
 
 input {
@@ -142,37 +150,43 @@ p.detailTitle {
 }
 
 hr {
-	border-top: 3px double #FF69B4;
+	border-top: 4px double lightgrey;
+	margin: 27px;
 	width: 85%;
 }
 
 .desc {
 	text-align: left;
 	display: inline-block;
-	width: 90%;
+	width: 88%;
 	padding: 5px 0;
 }
 
 .desc>img {
 	float: left;
-	margin-right: 10px;
-	width: 25%;
+	margin-bottom: 15px;
+	margin-right: 14px;
+	width: 30%;
+}
+
+.etsy-option {
+	display: block;
+	height: 50px;
 }
 
 a.purchase {
 	position: relative;
 }
 
-.overlay button, .overlay input {
-	margin: 10px 2px;	
-}
-
 .overlay button {
-	padding: 0px 15px;
+	display: block;
+	margin: 13px auto;
+	padding: 0px 16px;
 	width: auto;
 }
 
 .overlay input {
+	margin: 10px 2px;
 	padding: 3px 10px;
 }
 
@@ -200,25 +214,33 @@ a.purchase {
 	margin-left: 25px;
 	margin-bottom: 10px;
 	padding: 5px;
-
 }
 
-p.description {
-	width: 70%;
-	height: 109px;
-	max-height: 115px;
+p.etsy-detail, p.description {
 	padding-right: 5px;
 	padding-left: 5px;
 	text-align: left;
-	overflow: hidden;
+}
+
+p.description {
+	width: 64%;
 	margin: 0 0;
+	max-height: 182px;
+	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
+p.etsy-detail {
+	clear: left;
+	margin: 13px;
+	text-align: center;
+}
+
+
 p.detailTitle {
 	display: block;
-	width: 90%;
-	margin: auto;
+	width: 80%;
+	margin: 15px auto;
 }
 
 .overlay>a.close {
@@ -257,7 +279,6 @@ img.imageYT {
 	overflow: hidden;
   	text-overflow: ellipsis;
 }
-
 
 a.urlYT:before {
 	font-family: FontAwesome;

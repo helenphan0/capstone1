@@ -116,6 +116,8 @@ $(document).ready(function() {
     if (window.Appcues) {
         window.Appcues.on("step_interacted", (data) => {
             console.log('STEP INTERACTED', data);
+            const apcUser = window.Appcues.user(false);
+            console.log("USER", apcUser);
         })
     }
 

@@ -113,6 +113,11 @@ var resultTags;
 var howto = "how to make a ";
 
 $(document).ready(function() {
+    if (window.Appcues) {
+        window.Appcues.on("step_interacted", (data) => {
+            console.log('STEP INTERACTED', data);
+        })
+    }
 
 	// Front page search input submission
 	$('#create').submit(function(e){
